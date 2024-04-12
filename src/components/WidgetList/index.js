@@ -44,7 +44,12 @@ const ListWidgets = ({ refresh, widgets }) => (
 )
 
 const CreateWidget = ({ refresh }) => (
-  <WidgetDisplay widget={{ name: '', price: '0.0', description: '' }} refresh={refresh} main={true} />
+  <>
+    <Typography sx={{ textAlign: 'center' }} variant="h3">
+      Create Widget
+    </Typography>
+    <WidgetDisplay widget={{ name: '', price: '0.0', description: '' }} refresh={refresh} main={true} />
+  </>
 )
 
 const FilterArea = ({ setParams, refresh, filterCriteria }) => (
