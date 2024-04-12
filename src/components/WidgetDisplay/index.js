@@ -21,6 +21,8 @@ const DisplayWidget = ({ widget, refresh, main }) => {
             .then(res => {
               if (res.data)
                 refresh();
+            }).catch(error => {
+              alert(error.response.data.map(d => d).join('\n'))
             })
         }}>
           <CardContent>
@@ -29,7 +31,7 @@ const DisplayWidget = ({ widget, refresh, main }) => {
                 <TextField label='Name' id="nameTxt" defaultValue={name} /> :
                 <InputLabel>{name}</InputLabel>
               }
-              <TextField label="Price" id="priceTxt" defaultValue={price} type='number'/>
+              <TextField label="Price" id="priceTxt" defaultValue={price} type='number' />
               <TextField label="Description" id="descriptionTxt" defaultValue={description} />
             </Stack>
           </CardContent>
