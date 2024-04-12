@@ -1,30 +1,51 @@
-import React from 'react'
+import { Button, CardActions, InputLabel, TextField } from '@mui/material'
+import { deleteWidget, updateWidget } from '../../facade/widget-facade'
+
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
+import React from 'react'
 import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
 
-const DisplayWidget = ({ widget }) => {
+const DisplayWidget = ({ widget, refresh, main }) => {
   const { description, name, price } = widget
   return (
     <Grid item xs={6}>
       <Card>
-        <CardContent>
-          <Stack spacing={2}>
-            <Typography component="div" gutterBottom variant="h4">
-              {name}
-            </Typography>
-            <Typography component="div" gutterBottom variant="h5">
-              ${price}
-            </Typography>
-            <Typography color="text.secondary" variant="body2">
-              {description}
-            </Typography>
-          </Stack>
-        </CardContent>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          let newName = name
+          const { priceTxt, descriptionTxt } = e.target
+          if (main) newName = e.target.nameTxt.value
+          updateWidget({ name: newName, price: priceTxt.value, description: descriptionTxt.value })
+            .then(res => {
+              if (res.data)
+                refresh();
+            })
+        }}>
+          <CardContent>
+            <Stack spacing={2}>
+              {main ?
+                <TextField id="nameTxt" defaultValue={name} /> :
+                <InputLabel>{name}</InputLabel>
+              }
+              <TextField id="priceTxt" defaultValue={price} type='number' step="any" min="1" />
+              <TextField id="descriptionTxt" defaultValue={description} />
+            </Stack>
+          </CardContent>
+          <CardActions>
+            {!main && <Button onClick={(e) => {
+              e.preventDefault();
+              deleteWidget({ name }).then(res => {
+                if (res.data)
+                  refresh();
+              });
+            }}>Delete</Button>}
+            <Button type='submit'>{main ? "Create" : "Update"}</Button>
+          </CardActions>
+        </form>
       </Card>
-  </Grid>)
+    </Grid>)
 }
 
 export default DisplayWidget
