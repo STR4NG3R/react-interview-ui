@@ -26,11 +26,11 @@ const DisplayWidget = ({ widget, refresh, main }) => {
           <CardContent>
             <Stack spacing={2}>
               {main ?
-                <TextField id="nameTxt" defaultValue={name} /> :
+                <TextField label='Name' id="nameTxt" defaultValue={name} /> :
                 <InputLabel>{name}</InputLabel>
               }
-              <TextField id="priceTxt" defaultValue={price} type='number' step="any" min="1" />
-              <TextField id="descriptionTxt" defaultValue={description} />
+              <TextField label="Price" id="priceTxt" defaultValue={price} type='number'/>
+              <TextField label="Description" id="descriptionTxt" defaultValue={description} />
             </Stack>
           </CardContent>
           <CardActions>
