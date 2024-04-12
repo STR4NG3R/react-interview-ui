@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import axios from "axios";
 
 export const useFetch = ({ intialState, route, options }) => {
-    console.log(route)
     const [data, setData] = useState(intialState);
     const [loading, setLoading] = useState(true)
     const [refetch, setReFetch] = useState(false)
@@ -14,7 +13,7 @@ export const useFetch = ({ intialState, route, options }) => {
             .then(res => setData(res.data))
             .catch(error => setError(error))
             .finally(() => setLoading(false))
-    }, [refetch])
+    }, [route, refetch])
 
     const refresh = () => setReFetch(prev => !prev)
     return { setData, data, loading, error, refresh }

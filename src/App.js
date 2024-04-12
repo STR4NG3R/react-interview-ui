@@ -9,7 +9,6 @@ import { createWidget } from './facade/widget-facade'
 const App = () => {
   useEffect(() => {
     (async () => {
-      console.log('iiniiasvidasn')
       try {
         await Promise.all(
           createWidget({ name: "Coca Cola", price: 12.32, description: 'A delicious soda' }),
@@ -18,7 +17,6 @@ const App = () => {
         )
       } catch (error) {
         console.log(error)
-
       }
     })()
   }, []

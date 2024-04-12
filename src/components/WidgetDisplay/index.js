@@ -26,17 +26,19 @@ const DisplayWidget = ({ widget, refresh, main }) => {
             })
         }}>
           <CardContent>
+            {/* <pre>{JSON.stringify(widget, null, 2)}</pre> */}
             <Stack spacing={2}>
               {main ?
                 <TextField label='Name' id="nameTxt" defaultValue={name} /> :
                 <InputLabel>{name}</InputLabel>
               }
               <TextField label="Price" id="priceTxt" defaultValue={price} type='number' />
-              <TextField label="Description" id="descriptionTxt" defaultValue={description} />
+              <TextField label="Description" id="descriptionTxt" multiline rows={3} defaultValue={description} />
             </Stack>
           </CardContent>
           <CardActions>
             {!main && <Button onClick={(e) => {
+              console.log("delete")
               e.preventDefault();
               deleteWidget({ name }).then(res => {
                 if (res.data)
